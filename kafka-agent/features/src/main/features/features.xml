@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- vi: set et smarttab sw=4 tabstop=4: -->
+<!--
+Copyright(c) 2015 Cisco, Inc.
+
+This program and the accompanying materials are made available under the
+terms of the Eclipse Public License v1.0 which accompanies this distribution,
+and is available at http://www.eclipse.org/legal/epl-v10.html
+-->
+<features name="odl-kafka-agent-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.0 http://karaf.apache.org/xmlns/features/v1.2.0">
+  <repository>mvn:org.opendaylight.yangtools/features-yangtools/${yangtools.version}/xml/features</repository>
+  <repository>mvn:org.opendaylight.controller/features-mdsal/${mdsal.version}/xml/features</repository>
+  <repository>mvn:org.opendaylight.controller/features-restconf/${mdsal.version}/xml/features</repository>
+  <feature name='odl-kafka-agent-api' version='${project.version}' description='OpenDaylight :: kafka-agent :: api'>
+    <feature version='${yangtools.version}'>odl-yangtools-models</feature>
+    <bundle>mvn:org.opendaylight.panda/kafka-agent-api/${project.version}</bundle>
+  </feature>
+  <feature name='odl-kafka-agent' version='${project.version}' description='OpenDaylight :: kafka-agent'>
+    <feature version="${mdsal.version}">odl-message-bus</feature>  
+    <feature version='${mdsal.version}'>odl-mdsal-broker</feature>
+    <feature version='${project.version}'>odl-kafka-agent-api</feature>
+    <!--bundle dependency='true'>mvn:org.ow2.util.bundles/zookeeper-3.3.1/1.0.0</bundle-->
+    <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.metrics-core/2.2.0_1</bundle>
+    <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.scala-library/2.10.2_1</bundle>
+    <bundle dependency='true'>mvn:org.apache.zookeeper/zookeeper/3.4.5</bundle>
+    <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.kafka_2.10/0.8.1_1</bundle>
+    <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.avro/1.7.7_1</bundle>
+    <bundle dependency='true'>mvn:com.thoughtworks.paranamer/paranamer/2.6.1</bundle>
+    <bundle dependency='true'>mvn:org.apache.commons/commons-compress/1.5</bundle>
+    <bundle dependency='true'>mvn:org.codehaus.jackson/jackson-core-asl/1.9.13</bundle>
+    <bundle dependency='true'>mvn:org.codehaus.jackson/jackson-mapper-asl/1.9.13</bundle>
+    <bundle dependency='true'>mvn:org.xerial.snappy/snappy-java/1.1.1.6</bundle>
+    <!--bundle dependency='true'>mvn:net.jpountz.lz4/lz4/1.2.0</bundle-->
+    <!--bundle dependency='true'>mvn:org.hamcrest/hamcrest-core/1.3</bundle-->
+    <!--bundle dependency='true'>mvn:jline/jline/0.9.94</bundle-->
+    <!--bundle dependency='true'>mvn:io.netty/netty/3.7.0.Final</bundle-->
+    <bundle>mvn:org.opendaylight.panda/kafka-agent-impl/${project.version}</bundle>
+    <configfile finalname="${configfile.directory}/kafka-agent.xml">mvn:org.opendaylight.panda/kafka-agent-impl/${project.version}/xml/config</configfile>
+  </feature>
+  <feature name='odl-kafka-agent-rest' version='${project.version}' description='OpenDaylight :: kafka-agent :: REST'>
+    <feature version="${project.version}">odl-kafka-agent</feature>
+    <feature version="${mdsal.version}">odl-restconf</feature>
+  </feature>
+  <feature name='odl-kafka-agent-ui' version='${project.version}' description='OpenDaylight :: kafka-agent :: UI'>
+    <feature version="${project.version}">odl-kafka-agent-rest</feature>
+    <feature version="${mdsal.version}">odl-mdsal-apidocs</feature>
+    <feature version="${mdsal.version}">odl-mdsal-xsql</feature>
+  </feature>
+
+</features>
