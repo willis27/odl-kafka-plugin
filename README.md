@@ -1,6 +1,6 @@
 # prod-odl-kafka
 ##Overview
-`odl-kafka-plugin` is an Opendaylight (ODL)  northbound plugin that allows real-time or near real-time event or telemetry data streaming into such a big-data platform as PaNDA. The key design goal of this plugin is to provide a genenric and configurable data connector that subscribes to southbound event source(s) via ODL's Event Topic Broker (ETB) on one side, and forward notifications to a Kafka endpoint.
+`odl-kafka-plugin` is an Opendaylight (ODL)  northbound plugin that allows real-time or near real-time event or telemetry data streaming/aggreagted to a Kafka cluster. The key design goal of this plugin is to provide a genenric and configurable data connector that subscribes to southbound event source(s) via ODL's Event Topic Broker (ETB) on one side, and forward notifications to a Kafka endpoint.
 
 The `odl-kafka-plugin` has been development using Lithium maven artetype and tested using ODL Lithium 0.3.0 container (distribution-karaf-0.3.0-Lithium). 
 
